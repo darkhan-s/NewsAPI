@@ -1,4 +1,5 @@
-﻿using NewsParserBeta;
+﻿using NewsAPI_beta.Models;
+using NewsParserBeta;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -12,6 +13,20 @@ namespace NewsAPI_beta.Controllers
         // GET api/topten
         public IEnumerable<WordsCounterModel> Get()
         {
+
+            Parser parser = new Parser();
+
+            // To load 30 news
+            for (int i = 1; i < 4; i++)
+            {
+                parser.Parse("https://kapital.kz/tehnology?page=" + i.ToString());
+            }
+
+            Connector connector = new Connector("DARKHAN\\SQLEXPRESS", "TestDB");
+
+            connector.Publish(parser.Rows);
+
+
             List<SqlRow> news = new List<SqlRow>();
             SqlConnection cn = new SqlConnection("Server = DARKHAN\\SQLEXPRESS; Database = TestDB; Integrated Security = True;");
             string command = string.Format(@"SELECT * FROM News");
@@ -26,8 +41,7 @@ namespace NewsAPI_beta.Controllers
                     Title = (string)dr["Title"],
                     Date = dr["Date"].ToString(),
                     Content = (string)dr["Content"],
-                }
-                    );
+                });
 
             }
 
@@ -48,18 +62,14 @@ namespace NewsAPI_beta.Controllers
                             Cnt = counts.Count()
                         }).OrderByDescending(x => x.Cnt).Take(10);
 
-            
+
+            cn.Close();
             return topUsed;
 
         }
 
     }
 
-    public class WordsCounterModel
-    {
-        public string Key {get;set;}
-        public int Cnt {get;set;}
-    }
 
 
     

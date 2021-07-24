@@ -12,6 +12,20 @@ namespace NewsAPI_beta.Controllers
         // GET api/search
         public IEnumerable<SqlRow> Get(string text)
         {
+
+            Parser parser = new Parser();
+
+            // To load 30 news
+            for (int i = 1; i < 4; i++)
+            {
+                parser.Parse("https://kapital.kz/tehnology?page=" + i.ToString());
+            }
+
+            Connector connector = new Connector("DARKHAN\\SQLEXPRESS", "TestDB");
+
+            connector.Publish(parser.Rows);
+
+
             List<SqlRow> news = new List<SqlRow>();
             SqlConnection cn = new SqlConnection("Server = DARKHAN\\SQLEXPRESS; Database = TestDB; Integrated Security = True;");
             string command = string.Format(@"SELECT * FROM News WHERE [Title] LIKE N'%{0}%' OR [Content] LIKE N'%{1}%' ", text, text);
@@ -30,6 +44,7 @@ namespace NewsAPI_beta.Controllers
                     );
 
             }
+            cn.Close();
             return news;
 
         }
