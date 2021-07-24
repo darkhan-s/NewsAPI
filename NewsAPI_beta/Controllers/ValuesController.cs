@@ -7,7 +7,7 @@ using System.Web.Http;
 
 namespace NewsAPI_beta.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class ValuesController : ApiController
     {
         // GET api/values
