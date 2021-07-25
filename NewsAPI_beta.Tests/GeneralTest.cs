@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace NewsAPI_beta.Tests
 {
     [TestClass]
-    public class APITests
+    public class GeneralTest
     {
         [TestMethod]
         public void IsRowsCountCorrect()
