@@ -1,36 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Globalization;
 using System.Web.Http;
-using NewsParserBeta;
 
 namespace NewsAPI_beta.Controllers
 {
-    [Authorize]
     public class PostsController : ApiController
     {
         // GET api/posts
+        /// <summary>
+        /// Returns all news in the database
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<SqlRow> Get()
         {
-
-
-            Parser parser = new Parser();
-
-            // To load 30 news
-            for (int i = 1; i < 4; i++)
-            {
-                parser.Parse("https://kapital.kz/tehnology?page=" + i.ToString());
-            }
-
-            Connector connector = new Connector("DARKHAN\\SQLEXPRESS", "TestDB");
-
-            connector.Publish(parser.Rows);
-
-
+            //refresh DB before GET request
+            UpdateTable.Update();
             List<SqlRow> news = new List<SqlRow>();
-            SqlConnection cn = new SqlConnection("Server = DARKHAN\\SQLEXPRESS; Database = TestDB; Integrated Security = True;");
+
+            string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+
+            SqlConnection cn = new SqlConnection(connectionString);
             string command = "select * from News";
             cn.Open();
             SqlDataAdapter da = new SqlDataAdapter(command, cn);
@@ -52,24 +45,21 @@ namespace NewsAPI_beta.Controllers
         }
 
         // GET /api/posts?from=&to
+        /// <summary>
+        /// Returns news between "from" and "to" timeframes
+        /// </summary>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
+        /// <returns></returns>
         public IEnumerable<SqlRow> Get(DateTime from, DateTime to)
         {
-
-            Parser parser = new Parser();
-
-            // To load 30 news
-            for (int i = 1; i < 4; i++)
-            {
-                parser.Parse("https://kapital.kz/tehnology?page=" + i.ToString());
-            }
-
-            Connector connector = new Connector("DARKHAN\\SQLEXPRESS", "TestDB");
-
-            connector.Publish(parser.Rows);
-
+            //refresh DB before GET request
+            UpdateTable.Update();
 
             List<SqlRow> news = new List<SqlRow>();
-            SqlConnection cn = new SqlConnection("Server = DARKHAN\\SQLEXPRESS; Database = TestDB; Integrated Security = True;");
+            string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+
+            SqlConnection cn = new SqlConnection(connectionString);
             string command = string.Format(@"SELECT * FROM News WHERE [Date] BETWEEN '{0}' AND '{1}' ", from.ToString(CultureInfo.InvariantCulture), to.ToString(CultureInfo.InvariantCulture));
             cn.Open();
             SqlDataAdapter da = new SqlDataAdapter(command, cn);

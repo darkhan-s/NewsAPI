@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsAPI_beta", "NewsAPI_bet
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsAPI_beta.Tests", "NewsAPI_beta.Tests\NewsAPI_beta.Tests.csproj", "{695EA762-60E4-4E37-9C63-B63456DF8CBE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsParserBeta", "..\NewsParserBeta\NewsParserBeta\NewsParserBeta.csproj", "{8F9DF74D-7850-4378-BF46-2780EBE0517B}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{695EA762-60E4-4E37-9C63-B63456DF8CBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{695EA762-60E4-4E37-9C63-B63456DF8CBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{695EA762-60E4-4E37-9C63-B63456DF8CBE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8F9DF74D-7850-4378-BF46-2780EBE0517B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8F9DF74D-7850-4378-BF46-2780EBE0517B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8F9DF74D-7850-4378-BF46-2780EBE0517B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8F9DF74D-7850-4378-BF46-2780EBE0517B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

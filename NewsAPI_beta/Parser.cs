@@ -7,6 +7,9 @@ using HtmlAgilityPack;
 
 namespace NewsAPI_beta
 {
+    /// <summary>
+    /// Class to parse articles from fixed source and store them in SqlRows class
+    /// </summary>
     public class Parser
     {
         public Parser()
@@ -95,6 +98,12 @@ namespace NewsAPI_beta
 
         }
 
+        /// <summary>
+        /// Convert HTML nodes to sql rows class
+        /// </summary>
+        /// <param name="titleList"></param>
+        /// <param name="dateList"></param>
+        /// <param name="contentList"></param>
         private void ConvertToRows(List<HtmlNode> titleList, List<HtmlNode> dateList, List<HtmlNode> contentList)
         {
 
@@ -112,6 +121,11 @@ namespace NewsAPI_beta
             shift = shift + 10;
         }
 
+        /// <summary>
+        /// Fix datetime HTML formatting to SQL acceptable data
+        /// </summary>
+        /// <param name="rawDate"></param>
+        /// <returns></returns>
         private string FixDateTime(string rawDate)
         {
             rawDate = rawDate.Replace(" &middot; ", "-");

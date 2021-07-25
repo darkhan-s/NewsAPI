@@ -227,6 +227,7 @@
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="SqlRow.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="UpdateTable.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
@@ -302,12 +303,6 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\NewsParserBeta\NewsParserBeta\NewsParserBeta.csproj">
-      <Project>{8f9df74d-7850-4378-bf46-2780ebe0517b}</Project>
-      <Name>NewsParserBeta</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

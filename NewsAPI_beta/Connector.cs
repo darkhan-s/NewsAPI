@@ -1,39 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
 
 namespace NewsAPI_beta
 {
+    /// <summary>
+    /// Class to connect and publish articles to SQL database
+    /// </summary>
     public class Connector
     {
-        //constructor for standard connection with username
-        public Connector(string server, string database, string username, string password)
+        
+        public Connector()
         {
-            Server = server;
-            Database = database;
-            Username = username;
-            Password = password;
+
         }
 
-        // if windows authentication is used
-        public Connector(string server, string database)
-        {
-            Server = server;
-            Database = database;
-        }
-
+        /// <summary>
+        /// Method to connect and publish data to MS SQL express
+        /// </summary>
+        /// <param name="rows">Data received from Parser class</param>
         public void Publish(List<SqlRow> rows)
         {
-            string connectionString = "";
+            string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
 
-            if (Username == null && Password == null)
-            {
-                connectionString = string.Format("Server= {0}; Database={1}; Integrated Security=True;", Server, Database);
-            }
-            else
-            {
-                connectionString = string.Format("Server= {0}; Database={1}; User id = {2}, Password = {3};", Server, Database, Username, Password);
-            }
             string databaseQuery = @"CREATE DATABASE TestDB";
             string tableQuery = @"CREATE TABLE News(Id int IDENTITY(1,1) PRIMARY KEY, Title nvarchar(256), Date DateTime, Content nvarchar(256) )";
 
@@ -93,10 +83,6 @@ namespace NewsAPI_beta
 
         }
 
-
-        private string Server { get; set; } = "DARKHAN\\SQLEXPRESS";
-        private string Database { get; set; } = "TestDB";
-        private string Username { get; set; }
-        private string Password { get; set; }
+        
     }
 }
