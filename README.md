@@ -19,4 +19,6 @@ Parser.cs file contains the Parser class, which is hardcoded to parse the select
 
 Connector.cs contains the Connector class, which connects to SQL DB and publishes the updates from the website. The table is updated whenever GET is requested. 
 
+Finally, some simple unit tests are added for controllers.
+
 The application does not yet support authentication, but the initial plan is to implement JWT authentication. 
